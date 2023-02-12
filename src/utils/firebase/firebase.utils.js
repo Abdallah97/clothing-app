@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "firebase/auth";
 
 import {getDoc,setDoc,doc,getFirestore} from 'firebase/firestore';
 
@@ -39,9 +39,6 @@ export const createUserProfileDocument = async (userAuth,additionalData={}) => {
  const userRef = doc(db, "users", userAuth.uid);
 
     const snapShot = await getDoc(userRef);
-
-    console.log(snapShot.exists());
-
     if (!snapShot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
@@ -71,6 +68,15 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password);
   };
+
+  export const signOutAuthUser = async () => {
+    await signOut(auth);
+  };
+
+  export const onAuthStateChangedAuthUser = async (callback) => {
+    onAuthStateChanged(auth, callback);
+  };
+
 
 
 export default firebaseApp;
