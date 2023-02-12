@@ -1,38 +1,28 @@
+import Home from "./routes/home/Home.component";  
+
+import Navigation from "./routes/Navigation/Navigation.component";
+
+import Authntication from "./routes/Authintication/Auth.component";
+
+import {Routes,Route} from 'react-router-dom';
 
 
-import CategoriesList from './components/categories-list/categories-list.component';  
+
+function Shop(){
+  return <h3>Shop Now</h3>
+}
+
 function App() {
-const categories =[
-  {
-    id: 1,
-    title: 'hats',
-    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-  },
-  {
-    id: 2,
-    title: 'jackets',
-    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-  },
-  {
-    id: 3,
-    title: 'sneakers',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-  },
-  {
-    id: 4,
-    title: 'women',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-  },
-  {
-    id: 5,
-    title: 'men',
-    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-  },
-];
 
   return (
-  
-    <CategoriesList categories={categories}/>
+   <Routes>
+      <Route path="/" element={<Navigation/>}>
+       <Route index element={<Home/>}/>
+       <Route path="/shop" element={<Shop/>}/>
+       <Route path="/auth" element={<Authntication/>}/>
+      </Route>
+    </Routes>
+
   );
 }
    
